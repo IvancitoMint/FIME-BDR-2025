@@ -1,5 +1,5 @@
-CREATE DATABASE Titulacion_2025
-USE Titulacion_2025
+CREATE DATABASE Titulacion_2025;
+USE Titulacion_2025;
 
 -- TABLA MODALIDAD
 CREATE TABLE Modalidad

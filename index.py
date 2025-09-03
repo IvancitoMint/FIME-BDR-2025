@@ -5,7 +5,7 @@ import streamlit as st
 # -------------------------------
 # CONEXIÓN A LA BASE DE DATOS
 # -------------------------------
-server = r'TU_SERVER' # Cambia el nombre por el de tu servidor.
+server = r'DESKTOP-ONNPS1D' # Cambia el nombre por el de tu servidor.
 database = 'Titulacion_2025'
 
 try:
