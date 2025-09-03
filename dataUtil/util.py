@@ -36,18 +36,18 @@ def createSection(opts:list, conn):
             nc = st.number_input("No. de cuenta", min_value=200000, step=1)
             finalText = f"{finalText}, su No. de Cuenta"
         if opt == "Carrera":
-            car = st.multiselect("Carrera", pd.read_sql("SELECT Nombre_carrera FROM Carrera", conn))
+            car = st.selectbox("Carrera", pd.read_sql("SELECT Nombre_carrera FROM Carrera", conn))
             finalText = f"{finalText}, su {opt} actual"
         if opt == "Modalidad":
-            mod = st.multiselect("Modalidad", pd.read_sql("SELECT Nombre_modalidad FROM Modalidad ", conn))
+            mod = st.selectbox("Modalidad", pd.read_sql("SELECT Nombre_modalidad FROM Modalidad ", conn))
             stQuery.append("Modalidad.Nombre_modalidad")
             finalText = f"{finalText}, su {opt} de titulacion"
         if opt == "Fecha de titulacion":
-            date = st.multiselect("fecha", pd.read_sql("SELECT DISTINCT Fecha_titulacion FROM Titulacion ", conn))
+            date = st.selectbox("fecha", pd.read_sql("SELECT DISTINCT Fecha_titulacion FROM Titulacion ", conn))
             stQuery.append("Titulacion.Fecha_titulacion")
             finalText = f"{finalText}, su {opt}"
         if opt == "Profesor":
-            prf = st.multiselect("Profesor", pd.read_sql("SELECT Nombre_profesor FROM Profesor ", conn))
+            prf = st.selectbox("Profesor", pd.read_sql("SELECT Nombre_profesor FROM Profesor ", conn))
             stQuery.append("Profesor.Nombre_profesor")
             stQuery.append("Titulacion_Profesor.Rol")
             finalText = f"{finalText}, su {opt} encargado"
@@ -66,13 +66,13 @@ def createSection(opts:list, conn):
         if nc:
             finalQuery += f" AND Estudiante.Id_estudiante = {nc}"
         if car:
-            finalQuery += f" AND Carrera.Nombre_carrera = '{car[0]}'"
+            finalQuery += f" AND Carrera.Nombre_carrera = '{car}'"
         if mod:
-            finalQuery += f" AND Modalidad.Id_modalidad = '{mod[0]}'"
+            finalQuery += f" AND Modalidad.Id_modalidad = '{mod}'"
         if date:
-            finalQuery += f" AND Titulacion.Fecha_titulacion = '{date[0]}'"
+            finalQuery += f" AND Titulacion.Fecha_titulacion = '{date}'"
         if prf:
-            finalQuery += f" AND Profesor.Nombre_profesor = '{prf[0]}'"
+            finalQuery += f" AND Profesor.Nombre_profesor = '{prf}'"
             #Agregar iteracion para la lista de valores obtenidos en cada consulta, o directamente
             #cambiar el tipo de input por uno que no deje elejir mas de 1
         #st.text(finalQuery)
