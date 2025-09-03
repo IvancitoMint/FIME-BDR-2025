@@ -1,11 +1,13 @@
 import pyodbc
 import pandas as pd
 import streamlit as st
+from dataUtil import util
 
 # -------------------------------
 # CONEXIÓN A LA BASE DE DATOS
 # -------------------------------
 server = r'DESKTOP-ONNPS1D' # Cambia el nombre por el de tu servidor.
+server = r'DESKTOP-GU8C6K2' # Cambia el nombre por el de tu servidor.
 database = 'Titulacion_2025'
 
 try:
@@ -58,3 +60,5 @@ if nombre_profesor:
     df_resultado = pd.read_sql(query, conn, params=[f"%{nombre_profesor}%"])
     st.subheader(f"🔎 Alumnos asignados a {nombre_profesor}")
     st.dataframe(df_resultado)
+
+util.chooseSection(conn)
