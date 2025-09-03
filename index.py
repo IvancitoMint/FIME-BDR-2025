@@ -7,7 +7,6 @@ from dataUtil import util
 # CONEXIÓN A LA BASE DE DATOS
 # -------------------------------
 server = r'DESKTOP-ONNPS1D' # Cambia el nombre por el de tu servidor.
-server = r'DESKTOP-GU8C6K2' # Cambia el nombre por el de tu servidor.
 database = 'Titulacion_2025'
 
 try:
