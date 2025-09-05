@@ -54,7 +54,7 @@ def createSection(opts:list, conn):
     doFilter = st.button("Filtrar")
     if doFilter:
         daQuery = formatList(stQuery)
-        finalQuery = (f"SELECT {daQuery} FROM Estudiante, Carrera, Facultad, Profesor, Modalidad, Titulacion, Titulacion_Profesor" + 
+        finalQuery = (f"SELECT DISTINCT {daQuery} FROM Estudiante, Carrera, Facultad, Profesor, Modalidad, Titulacion, Titulacion_Profesor" + 
                            " WHERE Estudiante.Id_estudiante = Titulacion.Id_estudiante"+
                            " AND Carrera.Id_carrera = Estudiante.Id_carrera"+
                            " AND Carrera.Id_facultad = Facultad.Id_facultad"+
