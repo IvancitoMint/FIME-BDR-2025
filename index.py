@@ -4,7 +4,6 @@ import streamlit as st
 from dataUtil import util
 from dataPlot import plot #Graficas
 
-
 from src.funciones import mostrar_tablas,filtrar_profesores
 from src.agregar_estudiante import agregar_estudiante
 from src.agregar_profesor import agregar_profesor

@@ -36,5 +36,3 @@ def filtrar_profesores(conn):
         df_resultado = pd.read_sql(query, conn, params=[f"%{nombre_profesor}%"])
         st.subheader(f"Alumnos asignados a {nombre_profesor}")
         st.dataframe(df_resultado)
-
-    # Grafica
