@@ -1,11 +1,18 @@
 import pyodbc
 import pandas as pd
 import streamlit as st
+from dataUtil import util
+from dataPlot import plot #Graficas
+
+
+from src.funciones import mostrar_tablas,filtrar_profesores
+from src.agregar_estudiante import agregar_estudiante
+from src.agregar_profesor import agregar_profesor
 
 # -------------------------------
 # CONEXIÓN A LA BASE DE DATOS
 # -------------------------------
-server = r'TU_SERVER' # Cambia el nombre por el de tu servidor.
+server = r'IVANCITO' # Cambia el nombre por el de tu servidor.
 database = 'Titulacion_2025'
 
 try:
@@ -16,45 +23,27 @@ try:
         "Trusted_Connection=yes;"
         "TrustServerCertificate=yes;"
     )
-    st.success("Conexión exitosa a la base de datos")
 except Exception as e:
     st.error(f"Error de conexión: {e}")
     st.stop()
 
 # -------------------------------
-# CARGA DE TABLAS
+# INTERFAZ DE USUARIO
 # -------------------------------
-df_estudiantes = pd.read_sql("SELECT * FROM Estudiante", conn)
-df_titulaciones = pd.read_sql("SELECT * FROM Titulacion", conn)
-df_profesores = pd.read_sql("SELECT * FROM Profesor", conn)
+st.sidebar.title("Opciones de filtrado y búsqueda")
 
-# -------------------------------
-# APP STREAMLIT
-# -------------------------------
-st.title("Base de Datos de Titulación")
+filtrado = st.sidebar.selectbox("Opción de filtrado:", ["Mostrar base de datos", "Filtrar por profesor", "Filtrar por estudiante", "Graficar datos","Agregar estudiante", "Agregar profesor"])
 
-st.subheader("Estudiantes")
-st.dataframe(df_estudiantes)
-
-st.subheader("Titulaciones")
-st.dataframe(df_titulaciones)
-
-st.subheader("Profesores")
-st.dataframe(df_profesores)
-
-# -------------------------------
-# FILTRO INTERACTIVO
-# -------------------------------
-nombre_profesor = st.text_input("Buscar alumnos por profesor:")
-if nombre_profesor:
-    query = f"""
-    SELECT p.Nombre_profesor, e.Id_estudiante, e.Nombre_estudiante, tp.Rol
-    FROM Profesor p
-    JOIN Titulacion_Profesor tp ON p.Id_profesor = tp.Id_profesor
-    JOIN Titulacion t ON tp.Id_titulacion = t.Id_titulacion
-    JOIN Estudiante e ON t.Id_estudiante = e.Id_estudiante
-    WHERE p.Nombre_profesor LIKE ?
-    """
-    df_resultado = pd.read_sql(query, conn, params=[f"%{nombre_profesor}%"])
-    st.subheader(f"🔎 Alumnos asignados a {nombre_profesor}")
-    st.dataframe(df_resultado)
+match filtrado:
+    case "Mostrar base de datos":
+        mostrar_tablas(conn)
+    case "Filtrar por profesor":
+        filtrar_profesores(conn)
+    case "Filtrar por estudiante":
+        util.chooseSection(conn)
+    case "Graficar datos":
+        plot.plotconn(conn)
+    case "Agregar estudiante":
+        agregar_estudiante(conn)
+    case "Agregar profesor":
+        agregar_profesor(conn)
