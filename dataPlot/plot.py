@@ -35,7 +35,7 @@ def createPlot(opt,conn):
             if d in contValues:
                 contValues[d]+=1 #podria contar las coincidencias con .count pero preferi hacerlo manual
         for c in contValues:
-            dirValuesNames['values'].append(int((int(contValues[c])*n)/100))
+            dirValuesNames['values'].append(int((int(contValues[c])*100)/n))
         textTitle = "Dritribución de Modalidades de Titulación"
 
     if opt == "Carreras":
@@ -59,21 +59,22 @@ def createPlot(opt,conn):
                 'CRR007':int(data.count('CRR007')),
                 'CRR008':int(data.count('CRR008')),
                 'CRR009':int(data.count('CRR009')),
-                'CRR0010':int(data.count('CRR0010')),
-                'CRR0011':int(data.count('CRR0011')),
-                'CRR0012':int(data.count('CRR0012')),
-                'CRR0013':int(data.count('CRR0013')),
-                'CRR0014':int(data.count('CRR0014')),
-                'CRR0015':int(data.count('CRR0015')),
-                'CRR0016':int(data.count('CRR0016')),
-                'CRR0017':int(data.count('CRR0017')),
-                'CRR0018':int(data.count('CRR0018')),
-                'CRR0019':int(data.count('CRR0019')),
-                'CRR0020':int(data.count('CRR0020'))
+                'CRR010':int(data.count('CRR010')),
+                'CRR011':int(data.count('CRR011')),
+                'CRR012':int(data.count('CRR012')),
+                'CRR013':int(data.count('CRR013')),
+                'CRR014':int(data.count('CRR014')),
+                'CRR015':int(data.count('CRR015')),
+                'CRR016':int(data.count('CRR016')),
+                'CRR017':int(data.count('CRR017')),
+                'CRR018':int(data.count('CRR018')),
+                'CRR019':int(data.count('CRR019')),
+                'CRR020':int(data.count('CRR020'))
             }
+
             n = len(data)
             for c in contValues:
-                dirValuesNames['values'].append(int((int(contValues[c])*n)/100))
+                dirValuesNames['values'].append(int((int(contValues[c])*100)/n))
             dfNames=pd.read_sql("SELECT Nombre_carrera FROM Carrera",conn)
             dirValuesNames["names"] = [row[0] for row in dfNames.values.tolist()]
         
@@ -98,21 +99,23 @@ def createPlot(opt,conn):
                 'CRR007':int(data.count('CRR007')),
                 'CRR008':int(data.count('CRR008')),
                 'CRR009':int(data.count('CRR009')),
-                'CRR0010':int(data.count('CRR0010')),
-                'CRR0011':int(data.count('CRR0011')),
-                'CRR0012':int(data.count('CRR0012')),
-                'CRR0013':int(data.count('CRR0013')),
-                'CRR0014':int(data.count('CRR0014')),
-                'CRR0015':int(data.count('CRR0015')),
-                'CRR0016':int(data.count('CRR0016')),
-                'CRR0017':int(data.count('CRR0017')),
-                'CRR0018':int(data.count('CRR0018')),
-                'CRR0019':int(data.count('CRR0019')),
-                'CRR0020':int(data.count('CRR0020'))
+                'CRR010':int(data.count('CRR010')),
+                'CRR011':int(data.count('CRR011')),
+                'CRR012':int(data.count('CRR012')),
+                'CRR013':int(data.count('CRR013')),
+                'CRR014':int(data.count('CRR014')),
+                'CRR015':int(data.count('CRR015')),
+                'CRR016':int(data.count('CRR016')),
+                'CRR017':int(data.count('CRR017')),
+                'CRR018':int(data.count('CRR018')),
+                'CRR019':int(data.count('CRR019')),
+                'CRR020':int(data.count('CRR020'))
             }
+
             n = len(data)
             for c in contValues:
-                dirValuesNames['values'].append(int((int(contValues[c])*n)/100))
+                # st.text(f"{contValues[c]} -> {int((int(contValues[c])*100)/n)}")
+                dirValuesNames['values'].append(int((int(contValues[c])*100)/n))
             dfNames=pd.read_sql("SELECT Nombre_carrera FROM Carrera",conn)
             dirValuesNames["names"] = [row[0] for row in dfNames.values.tolist()]
         textTitle = "Dritribución de Carreras"
@@ -138,7 +141,7 @@ def createPlot(opt,conn):
             }
             n = len(data)
             for c in contValues:
-                dirValuesNames['values'].append(int((int(contValues[c])*n)/100))
+                dirValuesNames['values'].append(int((int(contValues[c])*100)/n))
             dirValuesNames["names"] = ["Asesor","Co-asesor","Presidente","Secretario","Vocal"]
             textTitle = "Dritribución de los Roles"
 
@@ -161,7 +164,7 @@ def createPlot(opt,conn):
             }
             n = len(data)
             for c in contValues:
-                dirValuesNames['values'].append(int((int(contValues[c])*n)/100))
+                dirValuesNames['values'].append(int((int(contValues[c])*100)/n))
             dirValuesNames["names"] = ["Asesor","Co-asesor","Presidente","Secretario","Vocal"]
             textTitle = "Dritribución de Roles del Profesor"
     df = pd.DataFrame(dirValuesNames)
