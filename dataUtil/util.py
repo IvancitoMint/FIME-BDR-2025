@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-from typing import final
 from numpy import append
 import pyodbc
 import pandas as pd
@@ -68,14 +66,12 @@ def createSection(opts:list, conn):
         if car:
             finalQuery += f" AND Carrera.Nombre_carrera = '{car}'"
         if mod:
-            finalQuery += f" AND Modalidad.Id_modalidad = '{mod}'"
+            finalQuery += f" AND Modalidad.Nombre_modalidad = '{mod}'"
         if date:
             finalQuery += f" AND Titulacion.Fecha_titulacion = '{date}'"
         if prf:
             finalQuery += f" AND Profesor.Nombre_profesor = '{prf}'"
-            #Agregar iteracion para la lista de valores obtenidos en cada consulta, o directamente
-            #cambiar el tipo de input por uno que no deje elejir mas de 1
-        #st.text(finalQuery)
+
         data = pd.read_sql(finalQuery, conn)
         st.subheader(f"Datos filtrados en relacion a{finalText}")
         st.dataframe(data)
