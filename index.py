@@ -2,6 +2,7 @@ import pyodbc
 import pandas as pd
 import streamlit as st
 from dataUtil import util
+from dataPlot import plot #Graficas
 
 # -------------------------------
 # CONEXIÓN A LA BASE DE DATOS
@@ -42,6 +43,8 @@ st.dataframe(df_titulaciones)
 
 st.subheader("Profesores")
 st.dataframe(df_profesores)
+
+plot.plotconn(conn) #Graficas globales
 
 # -------------------------------
 # FILTRO INTERACTIVO
