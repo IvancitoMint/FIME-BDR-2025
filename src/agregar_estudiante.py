@@ -8,7 +8,7 @@ def incrementar_ids(conn,prefijo,nombre_base,nombre_id):
     cursor.execute(f"SELECT MAX({nombre_id}) FROM {nombre_base};")
     ultimo_id = cursor.fetchone()[0]
 
-    # Si no hay profesores, empezamos desde PRF001, de lo contrario se toma la parte numérica y se incrementa en 1
+    # Si no hay registros, empezamos desde 001, de lo contrario se toma la parte numérica y se incrementa en 1
     if ultimo_id is None:
         numero_incrementado = 1
     else:
