@@ -18,7 +18,7 @@ def incrementar_ids(conn,prefijo,nombre_base,nombre_id):
 
 def agregar_estudiante(conn):
     cursor = conn.cursor()
-    prefijo1 = "202"
+    prefijo1 = "TTL"
     nombre_base1 = "Titulacion"
     nombre_id1 = "Id_titulacion"
     Id_titulacion = incrementar_ids(conn,prefijo1,nombre_base1,nombre_id1)
